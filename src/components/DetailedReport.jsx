@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
-import { Pencil, Upload, Download } from 'lucide-react';
+import { Pencil, Upload, Download, UserPlus } from 'lucide-react';
+import Modal from './Modal';
 
 const allOrders = [
     {
@@ -101,13 +102,19 @@ export default function DetailedReport() {
     const [currentPage, setCurrentPage] = useState(1);
     const [selectedItems, setSelectedItems] = useState([]);
     const [selectAll, setSelectAll] = useState(false);
-    const fileInputRef = useRef(null);
 
     const itemsPerPage = 10;
     const totalPages = Math.ceil(orders.length / itemsPerPage);
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     const currentOrders = orders.slice(startIndex, endIndex);
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    // Hàm để mở modal thêm người dùng
+    const openAddUserModal = () => {
+        setIsModalOpen(true);
+    };
 
     const handleSelectAll = () => {
         if (selectAll) {
@@ -130,64 +137,6 @@ export default function DetailedReport() {
         setCurrentPage(page);
         setSelectAll(false);
         setSelectedItems([]);
-    };
-
-    const handleImport = () => {
-        fileInputRef.current?.click();
-    };
-
-    const handleFileUpload = (event) => {
-        const file = event.target.files?.[0];
-        if (!file) return;
-
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const text = e.target?.result;
-            const rows = text.split('\n');
-            const headers = rows[0].split(',');
-
-            const newOrders = rows.slice(1).map((row, index) => {
-                const values = row.split(',');
-                return {
-                    id: orders.length + index + 1,
-                    customer: {
-                        name: values[0],
-                        avatar: `https://i.pravatar.cc/40?img=${Math.floor(Math.random() * 70)}`
-                    },
-                    company: values[1],
-                    value: parseInt(values[2]),
-                    date: values[3],
-                    status: values[4].trim()
-                };
-            });
-
-            setOrders(prev => [...prev, ...newOrders]);
-        };
-        reader.readAsText(file);
-        event.target.value = '';
-    };
-
-    const handleExport = () => {
-        const itemsToExport = selectedItems.length > 0
-            ? orders.filter(order => selectedItems.includes(order.id))
-            : orders;
-
-        const csvContent = [
-            ['Customer Name', 'Company', 'Order Value', 'Order Date', 'Status'].join(','),
-            ...itemsToExport.map(order => [
-                order.customer.name,
-                order.company,
-                order.value,
-                order.date,
-                order.status
-            ].join(','))
-        ].join('\n');
-
-        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = 'orders.csv';
-        link.click();
     };
 
     const getPageNumbers = () => {
@@ -222,22 +171,20 @@ export default function DetailedReport() {
             <div className="flex justify-between items-center mb-6">
                 <h2 className="text-xl font-semibold">Detailed report</h2>
                 <div className="flex gap-3">
-                    <input
-                        type="file"
-                        ref={fileInputRef}
-                        className="hidden"
-                        accept=".csv"
-                        onChange={handleFileUpload}
-                    />
                     <button
-                        onClick={handleImport}
+                        onClick={openAddUserModal}
+                        className="flex items-center gap-2 px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors"
+                    >
+                        <UserPlus size={20} />
+                        Add User
+                    </button>
+                    <button
                         className="px-4 py-2 text-pink-500 border border-pink-500 rounded-lg hover:bg-pink-50 flex items-center gap-2"
                     >
                         <Upload size={16} />
                         Import
                     </button>
                     <button
-                        onClick={handleExport}
                         className="px-4 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600 flex items-center gap-2"
                     >
                         <Download size={16} />
@@ -338,6 +285,12 @@ export default function DetailedReport() {
                     </button>
                 </div>
             </div>
+
+            {/* Hiển thị component Modal và truyền các props cần thiết */}
+            <Modal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+            />
         </div>
     );
 }
