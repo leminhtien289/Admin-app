@@ -1,7 +1,7 @@
 import React from 'react';
 import { ShoppingCart, DollarSign, UserPlus, FileText } from 'lucide-react';
 import StatCard from '../components/StatCard';
-
+import DetailedReport from '../components/DetailedReport';
 
 export default function Dashboard() {
     return (
@@ -38,7 +38,9 @@ export default function Dashboard() {
                     />
                 </div>
             </section>
-            
+            <section>
+                <DetailedReport />
+            </section>
         </div>
     );
 }
