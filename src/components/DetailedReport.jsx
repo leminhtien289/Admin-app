@@ -116,6 +116,20 @@ export default function DetailedReport() {
         setIsModalOpen(true);
     };
 
+    // Hàm để xử lý việc thêm người dùng mới
+    const handleAddUser = (userData) => {
+        const newUser = {
+            id: (orders.length + 1).toString(),
+            customer: { name: userData.name, avatar: 'https://i.pravatar.cc/40?img=' + (orders.length + 2) },
+            company: userData.company,
+            value: Number(userData.orderValue),
+            date: new Date(userData.orderDate).toLocaleDateString(),
+            status: userData.status
+        };
+        setOrders([newUser, ...orders]);
+        setIsModalOpen(false); // Đóng modal sau khi thêm
+    };
+
     const handleSelectAll = () => {
         if (selectAll) {
             setSelectedItems([]);
@@ -290,6 +304,7 @@ export default function DetailedReport() {
             <Modal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
+                onSubmit={handleAddUser}
             />
         </div>
     );
