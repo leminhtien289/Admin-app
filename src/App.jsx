@@ -5,10 +5,16 @@ import Projects from './pages/Projects';
 
 function App() {
   return (
-    <>
-      <Layout />
-      <Dashboard />
-    </>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Dashboard />} />
+        <Route path="projects" element={<Projects />} />
+        <Route path="teams" element={<div>Teams page coming soon...</div>} />
+        <Route path="analytics" element={<div>Analytics page coming soon...</div>} />
+        <Route path="messages" element={<div>Messages page coming soon...</div>} />
+        <Route path="integrations" element={<div>Integrations page coming soon...</div>} />
+      </Route>
+    </Routes>
   );
 }
 
