@@ -1,7 +1,8 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { Pencil, Upload, Download, UserPlus } from 'lucide-react';
 import Modal from './Modal';
 
+// Danh sách người dùng
 const allOrders = [
     {
         id: 1,
@@ -99,16 +100,20 @@ const allOrders = [
 
 export default function DetailedReport() {
     const [orders, setOrders] = useState(allOrders);
+
+    // Hiển thị danh sách
     const [currentPage, setCurrentPage] = useState(1);
     const [selectedItems, setSelectedItems] = useState([]);
     const [selectAll, setSelectAll] = useState(false);
 
+    // Phân trang
     const itemsPerPage = 10;
     const totalPages = Math.ceil(orders.length / itemsPerPage);
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     const currentOrders = orders.slice(startIndex, endIndex);
 
+    //Modal
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     // Hàm để mở modal thêm người dùng
@@ -130,6 +135,7 @@ export default function DetailedReport() {
         setIsModalOpen(false); // Đóng modal sau khi thêm
     };
 
+    // Lấy toàn bộ danh sách
     const handleSelectAll = () => {
         if (selectAll) {
             setSelectedItems([]);
@@ -139,6 +145,7 @@ export default function DetailedReport() {
         setSelectAll(!selectAll);
     };
 
+    // Lấy từng cái
     const handleSelectItem = (id) => {
         setSelectedItems(prev =>
             prev.includes(id)
@@ -147,12 +154,14 @@ export default function DetailedReport() {
         );
     };
 
+    //Thay đổi
     const handlePageChange = (page) => {
         setCurrentPage(page);
         setSelectAll(false);
         setSelectedItems([]);
     };
 
+    //Lấy số trang làm phân trang
     const getPageNumbers = () => {
         const pages = [];
         const maxVisiblePages = 5;
@@ -263,7 +272,7 @@ export default function DetailedReport() {
                     </tbody>
                 </table>
             </div>
-
+            {/* Phân trang */}
             <div className="flex items-center justify-between mt-6">
                 <div className="text-gray-600">{orders.length} results</div>
                 <div className="flex items-center gap-2">

@@ -6,7 +6,7 @@ import DetailedReport from '../components/DetailedReport';
 export default function Dashboard() {
     return (
         <div className="max-w-7xl mx-auto">
-            {/* Overview Section */}
+            {/* Overview */}
             <section className="mb-8">
                 <h2 className="flex items-center text-lg font-semibold mb-4">
                     <FileText size={20} className="mr-2" /> Overview

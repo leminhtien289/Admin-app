@@ -55,7 +55,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                             id="name"
                             name="name"
                             required
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500 sm:text-sm"
+                            className="mt-1 block w-full h-10 rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500 sm:text-sm"
                             value={formData.name}
                             onChange={handleChange}
                         />
@@ -69,7 +69,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                             id="company"
                             name="company"
                             required
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500 sm:text-sm"
+                            className="mt-1 block w-full h-10 rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500 sm:text-sm"
                             value={formData.company}
                             onChange={handleChange}
                         />
@@ -84,7 +84,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                             name="orderValue"
                             required
                             min="0"
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500 sm:text-sm"
+                            className="mt-1 block w-full h-10 rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500 sm:text-sm"
                             value={formData.orderValue}
                             onChange={handleChange}
                         />
@@ -98,7 +98,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                             id="orderDate"
                             name="orderDate"
                             required
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500 sm:text-sm"
+                            className="mt-1 block w-full h-10 rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500 sm:text-sm"
                             value={formData.orderDate}
                             onChange={handleChange}
                         />
@@ -111,7 +111,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                             id="status"
                             name="status"
                             required
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500 sm:text-sm"
+                            className="mt-1 block w-full h-10 rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500 sm:text-sm"
                             value={formData.status}
                             onChange={handleChange}
                         >
