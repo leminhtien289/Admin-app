@@ -9,7 +9,7 @@ const Header = () => {
     return (
         <div className="bg-white border-b border-gray-200 px-8 py-4">
             <div className="flex justify-between items-center">
-                <h1 className="text-xl font-bold bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">DASHBOARD</h1>
+                <h1 className="text-2xl font-bold text-gray-800">DASHBOARD</h1>
                 <div className="flex items-center space-x-4">
 
                     <div className="relative">
