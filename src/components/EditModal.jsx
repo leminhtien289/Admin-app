@@ -16,6 +16,7 @@ const EditModal = ({ customer, onClose, onSave }) => {
             value: `$${formData.value}`,
         });
         onClose();
+        alert('Customer details updated successfully!');
     };
 
     return (
