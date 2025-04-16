@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 import {
     LayoutDashboard,
     Users,
@@ -13,21 +13,20 @@ import NavItem from './NavItem';
 const Sidebar = () => {
     return (
         <aside className="w-64 bg-white border-r border-gray-200 p-6">
-            <div className="flex items-center space-x-2 mb-8">
+            <Link to="/" className="flex items-center space-x-2 mb-8">
                 <span className="text-xl font-bold bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">
                     <img src='./Image 1858.png' />
                 </span>
-            </div>
+            </Link>
 
             <nav>
                 <ul className="space-y-2">
-                    <></>
-                    <NavItem icon={<LayoutDashboard size={20} />} text="Dashboard" />
-                    <NavItem icon={<FolderKanban size={20} />} text="Projects" />
-                    <NavItem icon={<Users size={20} />} text="Teams" />
-                    <NavItem icon={<BarChart3 size={20} />} text="Analytics" />
-                    <NavItem icon={<MessageSquare size={20} />} text="Messages" />
-                    <NavItem icon={<Link2 size={20} />} text="Integrations" />
+                    <NavItem icon={<LayoutDashboard size={20} />} text="Dashboard" to="/" />
+                    <NavItem icon={<FolderKanban size={20} />} text="Projects" to="/projects" />
+                    <NavItem icon={<Users size={20} />} text="Teams" to="/teams" />
+                    <NavItem icon={<BarChart3 size={20} />} text="Analytics" to="/analytics" />
+                    <NavItem icon={<MessageSquare size={20} />} text="Messages" to="/messages" />
+                    <NavItem icon={<Link2 size={20} />} text="Integrations" to="/integrations" />
                 </ul>
             </nav>
 
