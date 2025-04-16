@@ -20,7 +20,7 @@ const EditModal = ({ customer, onClose, onSave }) => {
     };
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-gradient bg-opacity-100 flex items-center justify-center z-50">
             <div className="bg-white rounded-xl w-full max-w-md p-6">
                 <div className="flex justify-between items-center mb-6">
                     <h2 className="text-xl font-semibold">Edit Customer</h2>
