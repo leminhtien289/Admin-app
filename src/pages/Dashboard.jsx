@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FileText, Import, Import as Export, Plus } from 'lucide-react';
 import TableRow from '../components/TableRow';
 import EditModal from '../components/EditModal';
+import AddUserModal from '../components/AddUserModal';
 
 export default function Dashboard() {
     const [customers, setCustomers] = useState([
@@ -28,6 +29,7 @@ export default function Dashboard() {
         }
     ]);
     const [editingCustomer, setEditingCustomer] = useState(null);
+    const [showAddModal, setShowAddModal] = useState(false);
 
     useEffect(() => {
         fetch("http://localhost:3000/customers")
@@ -50,6 +52,19 @@ export default function Dashboard() {
         setEditingCustomer(null);
     };
 
+    const handleAddUser = (newCustomer) => {
+        const randomAvatar = `https://images.unsplash.com/photo-${Math.floor(Math.random() * 1000000)}?w=100`;
+        const customer = {
+            name: newCustomer.name,
+            avatar: randomAvatar,
+            company: newCustomer.company,
+            value: newCustomer.value,
+            date: new Date().toLocaleDateString(),
+            status: newCustomer.status
+        };
+        setCustomers(prev => [customer, ...prev]);
+    };
+
     return (
         <div className="max-w-7xl mx-auto">
             <section>
@@ -65,6 +80,7 @@ export default function Dashboard() {
                             <div className="flex space-x-2">
                                 <button
                                     className="flex items-center px-4 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition-colors duration-150"
+                                    onClick={() => setShowAddModal(true)}
                                 >
                                     <Plus size={16} className="mr-2" /> Add User
                                 </button>
@@ -136,6 +152,13 @@ export default function Dashboard() {
                     customer={editingCustomer}
                     onClose={() => setEditingCustomer(null)}
                     onSave={handleSave}
+                />
+            )}
+
+            {showAddModal && (
+                <AddUserModal
+                    onClose={() => setShowAddModal(false)}
+                    onAdd={handleAddUser}
                 />
             )}
 
