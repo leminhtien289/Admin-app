@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FileText, Import, Import as Export, Plus } from 'lucide-react';
 import TableRow from '../components/TableRow';
+import EditModal from '../components/EditModal';
 
 export default function Dashboard() {
     const [customers, setCustomers] = useState([
@@ -26,12 +27,28 @@ export default function Dashboard() {
             status: "Shipped"
         }
     ]);
+    const [editingCustomer, setEditingCustomer] = useState(null);
 
     useEffect(() => {
         fetch("http://localhost:3000/customers")
             .then(res => res.json())
             .then(customers => setCustomers(customers));
     }, []);
+
+    const handleEdit = (customer) => {
+        setEditingCustomer(customer);
+    };
+
+    const handleSave = (updatedCustomer) => {
+        setCustomers(prevCustomers =>
+            prevCustomers.map(customer =>
+                customer === editingCustomer
+                    ? { ...customer, ...updatedCustomer }
+                    : customer
+            )
+        );
+        setEditingCustomer(null);
+    };
 
     return (
         <div className="max-w-7xl mx-auto">
@@ -83,6 +100,7 @@ export default function Dashboard() {
                                     <TableRow
                                         key={index}
                                         customer={customer}
+                                        onEdit={handleEdit}
                                     />
                                 ))}
                             </tbody>
@@ -112,6 +130,15 @@ export default function Dashboard() {
                     </div>
                 </div>
             </section>
+
+            {editingCustomer && (
+                <EditModal
+                    customer={editingCustomer}
+                    onClose={() => setEditingCustomer(null)}
+                    onSave={handleSave}
+                />
+            )}
+
         </div>
     );
 }

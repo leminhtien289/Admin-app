@@ -1,7 +1,7 @@
 import React from 'react';
 import { Pencil } from 'lucide-react';
 
-const TableRow = ({ customer }) => {
+const TableRow = ({ customer, onEdit }) => {
     const statusColors = {
         'New': 'bg-blue-50 text-blue-600',
         'In-progress': 'bg-yellow-50 text-yellow-600',
@@ -30,6 +30,7 @@ const TableRow = ({ customer }) => {
             <td className="py-4 pr-4">
                 <button
                     className="p-2 hover:bg-gray-100 rounded-lg transition-colors duration-150"
+                    onClick={() => onEdit(customer)}
                 >
                     <Pencil size={16} className="text-gray-400" />
                 </button>
