@@ -27,13 +27,11 @@ export default function Dashboard() {
         }
     ]);
 
-    // useEffect(() => {
-    //     fetch("http://localhost:3000/customers")
-    //         .then(res => res.json())
-    //         .then(customers => setCustomers(customers));
-    // }, []);
-
-    // console.log(customers)
+    useEffect(() => {
+        fetch("http://localhost:3000/customers")
+            .then(res => res.json())
+            .then(customers => setCustomers(customers));
+    }, []);
 
     return (
         <div className="max-w-7xl mx-auto">
